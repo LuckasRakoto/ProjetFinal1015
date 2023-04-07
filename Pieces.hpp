@@ -7,16 +7,16 @@ class Piece: public QObject {
 	private:
 		std::pair<int, int> position_;
 		char piece_;
-		char couleur_;
+		char color_;
 
 	public:
-		explicit Piece(char piece, char couleur) : piece_(piece), couleur_(couleur) {};
+		explicit Piece(char piece, char color) : piece_(piece), color_(color) {};
 		virtual ~Piece() = default;
 
 	public slots:
 		
 
 	signals:
-		void positionChanged(std::pair<int, int> nouvellePos);
+		void positionChanged(std::pair<int, int> newPos);
 		
 };
