@@ -116,8 +116,9 @@
     <ClCompile Include="Calc.cpp" />
     <ClCompile Include="CalcWindow.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
-    <ClCompile Include="king.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="TestCalc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +129,10 @@
     <QtMoc Include="Pieces.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="king.hpp" />
+    <ClInclude Include="Bishop.hpp" />
+    <ClInclude Include="Board.hpp" />
+    <ClInclude Include="Horse.hpp" />
+    <ClInclude Include="King.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

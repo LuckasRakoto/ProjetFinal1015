@@ -1,22 +1,28 @@
 #include <utility>
 #include <QObject>
 
+class Piece : public QObject, public Board {
+	Q_OBJECT
+protected:
+	std::pair<int, int> position_; // current position (row, column)
+	char piece_;
+	char color_;
 
-class Piece: public QObject {
-		Q_OBJECT
-	private:
-		std::pair<int, int> position_;
-		char piece_;
-		char color_;
+public:
+	explicit Piece(std::pair<int, int> position, char piece, char color) : position_(position), piece_(piece), color_(color) {}; //Constructeur; prk explicit?
+	virtual ~Piece() = default; //Destructeur; prk virtual?
 
-	public:
-		explicit Piece(char piece, char color) : piece_(piece), color_(color) {};
-		virtual ~Piece() = default;
-
-	public slots:
+	virtual bool isValidMove(std::pair<int, int> newPosition, const Board& board) = 0; //Validation du move
 		
+	void moveTo(std::pair<int, int> newPosition) { //Deplacement de position (apres validation)
+		get<0>(position_) = get<0>(newPosition);
+		get<1>(position_) = get<1>(newPosition);
+	}
 
-	signals:
-		void positionChanged(std::pair<int, int> newPos);
-		
+	char getPiece() const { return piece_; }
+	char getColor() const { return color_; }
+	
+/*public slots:
+signals:
+	void positionChanged(std::pair<int, int> newPos);*/
 };
