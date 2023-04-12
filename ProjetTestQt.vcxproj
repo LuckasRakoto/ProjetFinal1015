@@ -118,7 +118,7 @@
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="King.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardWindow.cpp" />
     <ClCompile Include="TestCalc.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.hpp" />
-    <ClInclude Include="Board.hpp" />
+    <QtMoc Include="BoardWindow.hpp" />
     <ClInclude Include="Horse.hpp" />
     <ClInclude Include="King.hpp" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿#include "Calc.hpp"
 #include "CalcWindow.hpp"
+#include "BoardWindow.hpp"
 
 #include <QApplication>
 #if __has_include("bibliotheque_cours.hpp")
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
+
 
 	CalcWindow calcWindow;
 	calcWindow.show();

@@ -46,7 +46,7 @@
     <ClCompile Include="King.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
+    <ClCompile Include="BoardWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,6 +60,9 @@
     <QtMoc Include="Pieces.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="BoardWindow.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="King.hpp">
@@ -69,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bishop.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

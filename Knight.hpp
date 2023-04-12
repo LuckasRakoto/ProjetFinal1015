@@ -1,10 +1,10 @@
 #include "Pieces.hpp"
 #include "Board.hpp"
 
-class Horse : public Piece {
+class Knight : public Piece {
 public:
     /*Horse(char color);*/ //positionner le cavalier à son endroit respectif pour sa couleur
-    Horse(std::pair<int, int> position, char couleur) : Piece(position, 'H', couleur) {} // creation horse (H)
+    Knight(std::pair<int, int> position, char couleur) : Piece(position, 'H', couleur) {} // creation horse (H)
     /*~Horse() { ; }*/ // besoin du destructeur??
 
     bool isValidMove(std::pair<int, int> newPosition, const Board& board) override { // verifie si deplacement = une case
