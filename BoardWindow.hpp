@@ -45,6 +45,9 @@ public:
 public slots:
     void pieceClicked();
 
+    template <typename T>
+    QLabel* CreateSquare(const QString& text, const T& slot);
+
     //void addPiece(Piece* piece, std::pair<int, int > position) { //rajoute la piece au board
     //    board_[get<0>(position)][get<1>(position)] = piece;
     //}

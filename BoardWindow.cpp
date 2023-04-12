@@ -23,6 +23,11 @@ void Square::paintEvent(QPaintEvent*, bool color) { //true = blanc
 
 }
 
+template <typename T>
+QLabel* BoardWindow::CreateSquare(const QString& text, const T& slot) { // Créer un label carré (clickable)
+
+}
+
 
 BoardWindow::BoardWindow(QWidget* parent = nullptr): QMainWindow(parent) { //initialise ttes les positions du board a nullptr
     auto widgetPrincipal = new QWidget(this);
@@ -34,7 +39,7 @@ BoardWindow::BoardWindow(QWidget* parent = nullptr): QMainWindow(parent) { //ini
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             Square square;
-            layoutPrincipal->addItem(square,i,j);
+            layoutPrincipal->addWidget() // ajoute les carrés
         }
     }
 }
