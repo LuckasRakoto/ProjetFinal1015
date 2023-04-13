@@ -1,57 +1,43 @@
-#include "Pieces.hpp"
-#ifndef CLICKABLELABEL_H
-#define CLICKABLELABEL_H
+ï»¿#include "Pieces.hpp"
 
+#pragma warning(push, 0) // Sinon Qt fait des avertissements Ã  /W4.
 #include <QMainWindow>
+#include <QPushButton>
+#include <QString>
 #include <QLabel>
-#include <QWidget>
-#include <Qt>
 #include <QGridLayout>
-#include <iostream>
-#include <QtGui>
+#pragma pop()
+class Piece {};
 
-class ClickableLabel : public QLabel { // Permet de faire un label cliquable -> Servira à cliquer sur les pièces
-	Q_OBJECT
-
-public:
-	explicit ClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
-
-signals:
-	void clicked();
-
-protected:
-	void mousePressEvent(QMouseEvent* event);
-
-};
-
-#endif
-
-class Square : public QWidget {
-public:
-    Square();
-protected:
-    void paintEvent(QPaintEvent*, bool color);
-};
-
-class BoardWindow: public QMainWindow {
+class BoardWindow : public QMainWindow {
     Q_OBJECT
 private:
     Piece* board_[8][8];
+    QPushButton* addSquare(const QString& text, int col, int row/*, const T& slot*/) {
+        QPushButton* button = new QPushButton(this);
+        (col + row) % 2 == 0 ? button->setStyleSheet({ "background-color: rgb(31,85,6);" }) : button->setStyleSheet(QString::fromUtf8("background-color:rgb(213,255,208);"));
+        button->setFlat(true);
+        button->setGeometry(QRect(col * 71, (row + 1) * 71, 71, 71));
+        button->setText(text);
+        return button;
+
+    }
 
 public:
-    BoardWindow(QWidget* parent = nullptr);
+    BoardWindow(QWidget* parent = nullptr) : QMainWindow(parent) {
+        auto widgetPrincipal = new QWidget(this);
+        auto layoutPrincipal = new QGridLayout(widgetPrincipal);
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                QPushButton* button = addSquare(QString::number(i), i, j);
+                layoutPrincipal->addWidget(button, i, j); // ajoute les carrï¿½s
+            }
+        }
+        this->resize(568, 568);
+        setCentralWidget(widgetPrincipal);
+        setWindowTitle("Echecs");
+    }
     ~BoardWindow() override = default;
 
-public slots:
-    void pieceClicked();
-
-    template <typename T>
-    QLabel* CreateSquare(const QString& text, const T& slot);
-
-    //void addPiece(Piece* piece, std::pair<int, int > position) { //rajoute la piece au board
-    //    board_[get<0>(position)][get<1>(position)] = piece;
-    //}
-
-    //TODO: movePiece()
-};
 

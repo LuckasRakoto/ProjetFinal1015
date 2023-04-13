@@ -9,6 +9,7 @@ using bibliotheque_cours::cdbg;
 #else
 auto& cdbg = clog;
 #endif
+#include <iostream>
 
 #if __has_include("verification_allocation.hpp")
 #include "verification_allocation.hpp"
