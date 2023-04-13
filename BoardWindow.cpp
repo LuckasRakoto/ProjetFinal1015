@@ -29,7 +29,7 @@ QLabel* BoardWindow::CreateSquare(const QString& text, const T& slot) { // Créer
 }
 
 
-BoardWindow::BoardWindow(QWidget* parent = nullptr): QMainWindow(parent) { //initialise ttes les positions du board a nullptr
+BoardWindow::BoardWindow(QWidget* parent = nullptr): /*QMainWindow(parent)*/ { //initialise ttes les positions du board a nullptr
     auto widgetPrincipal = new QWidget(this);
     auto layoutPrincipal = new QGridLayout(widgetPrincipal);
 
