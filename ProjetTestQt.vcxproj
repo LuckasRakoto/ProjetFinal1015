@@ -130,8 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.hpp" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Knight.hpp" />
     <QtMoc Include="BoardWindow.hpp" />
-    <ClInclude Include="Horse.hpp" />
     <ClInclude Include="King.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

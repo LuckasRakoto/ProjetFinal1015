@@ -68,10 +68,13 @@
     <ClInclude Include="King.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Horse.hpp">
+    <ClInclude Include="Bishop.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bishop.hpp">
+    <ClInclude Include="Knight.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
