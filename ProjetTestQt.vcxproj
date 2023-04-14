@@ -120,13 +120,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="BoardWindow.cpp" />
     <ClCompile Include="TestCalc.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Calc.hpp" />
     <QtMoc Include="CalcWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Pieces.hpp" />
+    <ClInclude Include="Pieces.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.hpp" />
