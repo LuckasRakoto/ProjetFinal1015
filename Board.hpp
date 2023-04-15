@@ -27,13 +27,50 @@ public:
 		}
 	}
 
+	bool checkIfPieceOnTile(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
+		if (board_[newPosition.first][newPosition.second] != nullptr &&
+			board_[newPosition.first][newPosition.second]->getColor() != board_[currentPosition.first][currentPosition.second]->getColor()) {
+			return true; // Valid move to capture opponent's piece
+		}
+		else if (board_[newPosition.first][newPosition.second] == nullptr) {
+			return true; // Valid move to an empty square
+		}
+		return false;
+	}
+
+	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
+		int rowDiff = abs(newPosition.first - currentPosition.first);
+		int rowMove = 0;
+		int columnMove = 0;
+
+		// direction de mouvement de case (ligne)
+		if (newPosition.first > currentPosition.first) rowMove = 1;
+		else rowMove = -1;
+		// direction de mouvement de case (colonne)
+		if (newPosition.second > currentPosition.second) columnMove = 1;
+		else columnMove = -1;
+
+		int row, col;
+		for (int i = 1; i < rowDiff; ++i) {
+			row = currentPosition.first + i * rowMove;
+			col = currentPosition.second + i * columnMove;
+			std::cout << row << std::endl;
+			std::cout << col << std::endl;
+			if (board_[row][col] != nullptr /*|| !boundaries(row, col)*/) {
+				std::cout << board_[row][col]->getPiece();
+				return false; // Path not clear
+			}
+		}
+		return true; // Path clear
+	}
+
 	void addPiece(Piece* piece, int row, int column) {
 		board_[row][column] = piece;
 	}
 
 	void movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
 		Piece* piece = board_[fromPosition.first][fromPosition.second];
-		if ((piece != nullptr) && (piece->isValidMove(toPosition, fromPosition))) {
+		if ((piece != nullptr) && (piece->isValidMove(toPosition, fromPosition, *this))) {
 			piece->moveTo(toPosition);
 			board_[toPosition.first][toPosition.second] = piece;
 			board_[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
@@ -76,7 +113,7 @@ public:
 				piece = board_[row][column];
 				piecePosition.first = row;
 				piecePosition.second = column;
-				if (piece != nullptr && piece->getColor() != color && piece->isValidMove(kingPosition, piecePosition)) {
+				if (piece != nullptr && piece->getColor() != color && piece->isValidMove(kingPosition, piecePosition, *this)) {
 					return true;
 				}
 			}
@@ -84,7 +121,7 @@ public:
 		return false;
 	}
 
-	bool boundaries(int row, int column) {
+	bool boundaries(int row, int column) const {
 		return (row >= 0 && row < 8 && column >= 0 && column < 8); // retourne vrai si la piece sort pas du plateau
 	}
 
