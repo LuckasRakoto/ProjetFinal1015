@@ -23,10 +23,7 @@ public:
 
 	virtual bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) = 0; //Validation du move
 
-	void moveTo(std::pair<int, int> newPosition) { //Deplacement de position (apres validation)
-		position_.first = newPosition.first;
-		position_.second = newPosition.second;
-	}
+	void moveTo(std::pair<int, int> newPosition);
 
 	// GETTERS
 	char getPiece() const { return piece_; }

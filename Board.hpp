@@ -14,10 +14,10 @@ class Board: public QObject {
 private:
 	Piece* boardState[8][8];
 	void addPiece(Piece* piece, int row, int col);
-	bool boundaries(int row, int column);
 public:
 	Board();
 	Piece* getPiece(int row, int col) const;
+	bool boundaries(int row, int column);
 
 
 	void printPieceAtPosition(std::pair<int, int> position) const {

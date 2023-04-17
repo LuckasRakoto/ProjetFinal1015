@@ -10,13 +10,5 @@ public:
 	~Bishop() = default;
 	Bishop(PieceColor color, char piece) : Piece(color, 'B') {}
 
-	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) /*override*/ {
-		int diffRow = abs(newPosition.first - currentPosition.first);
-		int diffColumn = abs(newPosition.second - currentPosition.second);
-
-		if ((diffRow == diffColumn) && board.noPiecesOnPath(newPosition, currentPosition)) {
-			return board.checkIfPieceOnTile(newPosition, currentPosition);
-		}
-		else return false;
-	}
+	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board);
 };
