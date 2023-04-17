@@ -21,7 +21,7 @@ public:
 	explicit Piece(PieceColor color, char piece) : color_(color), piece_(piece) {};
 	virtual ~Piece() = default;
 
-	virtual bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) = 0; //Validation du move
+	virtual bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) = 0; //Validation du move
 
 	void moveTo(std::pair<int, int> newPosition) { //Deplacement de position (apres validation)
 		position_.first = newPosition.first;
