@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.hpp" />
-    <ClInclude Include="Board.hpp" />
+    <QtMoc Include="Board.hpp" />
     <ClInclude Include="Knight.hpp" />
     <QtMoc Include="BoardWindow.hpp" />
     <ClInclude Include="King.hpp" />

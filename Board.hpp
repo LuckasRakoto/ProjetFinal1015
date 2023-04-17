@@ -1,3 +1,4 @@
+#pragma once
 #include "Pieces.hpp"
 #include <iostream>
 #include <QObject>
