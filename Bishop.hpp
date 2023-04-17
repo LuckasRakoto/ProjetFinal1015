@@ -10,5 +10,5 @@ public:
 	~Bishop() = default;
 	Bishop(PieceColor color, char piece) : Piece(color, 'B') {}
 
-	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board);
+	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board);
 };

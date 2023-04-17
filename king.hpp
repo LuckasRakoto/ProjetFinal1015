@@ -8,5 +8,5 @@ public:
 	King(PieceColor color, char piece) : Piece(color, 'K') {}
 	~King() = default;
 
-	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board);
+	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board);
 };
