@@ -25,7 +25,7 @@ QLabel* BoardWindow::addSquare(const QString& text, int col, int row) {
 	square->setFixedWidth(71);
 
 	(col + row) % 2 == 0 ? square->setStyleSheet("background-color: rgb(31,85,6);") : square->setStyleSheet("background-color:rgb(213,255,208);");
-
+	
 
 	if (board->getPiece(col, row) == nullptr) return square;
 	return nullptr;

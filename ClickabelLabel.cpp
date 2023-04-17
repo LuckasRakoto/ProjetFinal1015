@@ -7,5 +7,5 @@ ClickableLabel::ClickableLabel(QWidget* parent, Qt::WindowFlags f) :
 ClickableLabel::~ClickableLabel() {}
 
 void ClickableLabel::mousePressEvent(QMouseEvent* event) {
-	emit clicked();
+	emit clicked(4);
 }
