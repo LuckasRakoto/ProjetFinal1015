@@ -1,5 +1,5 @@
-﻿#include "Calc.hpp"
-#include "CalcWindow.hpp"
+﻿#include "Board.hpp"
+#include "BoardWindow.hpp"
 
 #include <QApplication>
 #if __has_include("bibliotheque_cours.hpp")
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	CalcWindow calcWindow;
-	calcWindow.show();
+	BoardWindow boardWindow;
+	boardWindow.show();
 	return app.exec();
 }

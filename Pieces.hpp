@@ -1,3 +1,4 @@
+#pragma once
 #include <utility>
 //#include <QObject>
 
@@ -7,7 +8,7 @@ enum class PieceColor {
 	Black
 };
 
-//class Board;
+class Board;
 
 class Piece {
 protected:

@@ -1,4 +1,5 @@
 #include "Pieces.hpp"
+#include <iostream>
 
 class Board {
 protected:

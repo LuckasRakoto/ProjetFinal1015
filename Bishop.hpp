@@ -4,7 +4,7 @@
 
 class Bishop : /*public Board,*/ public Piece {
 public:
-	/*Bishop(char color);*/ //positionner le fou à son endroit respectif pour sa couleur
+	/*Bishop(char color);*/ //positionner le fou Ã  son endroit respectif pour sa couleur
 	Bishop(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'B', couleur) {} // creation bishop (B)
 	~Bishop() = default;
 	Bishop(PieceColor color, char piece) : Piece(color, 'B') {}
