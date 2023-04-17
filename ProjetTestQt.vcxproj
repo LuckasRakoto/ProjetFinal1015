@@ -116,6 +116,7 @@
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
     <ClCompile Include="Calc.cpp" />
     <ClCompile Include="CalcWindow.cpp" />
+    <ClCompile Include="ClickabelLabel.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="King.cpp" />
     <ClCompile Include="main.cpp" />
@@ -128,6 +129,7 @@
     <QtMoc Include="CalcWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="ClickabelLabel.hpp" />
     <ClInclude Include="Pieces.hpp" />
   </ItemGroup>
   <ItemGroup>

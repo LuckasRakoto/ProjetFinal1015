@@ -1,22 +1,22 @@
 #include "Pieces.hpp"
 #include <iostream>
+#include <QObject>
 
-class Board {
-protected:
-	Piece* board_[8][8];
+class Board: public QObject {
+	Q_OBJECT
+private:
+	Piece* boardState[8][8];
+	void addPiece(Piece* piece, int row, int col);
+	bool boundaries(int row, int column);
 public:
-	Board() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				board_[i][j] = nullptr;
-			}
-		}
-	}
+	Board();
+	Piece* getPiece(int row, int col) const;
+
 
 	void printPieceAtPosition(std::pair<int, int> position) const {
 		int row = position.first;
 		int col = position.second;
-		Piece* piece = board_[row][col];
+		Piece* piece = boardState[row][col];
 
 		if (piece == nullptr) {
 			std::cout << "No piece at position (" << row << ", " << col << ")" << std::endl;
@@ -29,11 +29,11 @@ public:
 	}
 
 	bool checkIfPieceOnTile(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
-		if (board_[newPosition.first][newPosition.second] != nullptr &&
-			board_[newPosition.first][newPosition.second]->getColor() != board_[currentPosition.first][currentPosition.second]->getColor()) {
+		if (boardState[newPosition.first][newPosition.second] != nullptr &&
+			boardState[newPosition.first][newPosition.second]->getColor() != boardState[currentPosition.first][currentPosition.second]->getColor()) {
 			return true; // Valid move to capture opponent's piece
 		}
-		else if (board_[newPosition.first][newPosition.second] == nullptr) {
+		else if (boardState[newPosition.first][newPosition.second] == nullptr) {
 			return true; // Valid move to an empty square
 		}
 		return false;
@@ -57,8 +57,8 @@ public:
 			col = currentPosition.second + i * columnMove;
 			std::cout << row << std::endl;
 			std::cout << col << std::endl;
-			if (board_[row][col] != nullptr /*|| !boundaries(row, col)*/) {
-				std::cout << board_[row][col]->getPiece();
+			if (boardState[row][col] != nullptr /*|| !boundaries(row, col)*/) {
+				std::cout << boardState[row][col]->getPiece();
 				return false; // Path not clear
 			}
 		}
@@ -66,15 +66,15 @@ public:
 	}
 
 	void addPiece(Piece* piece, int row, int column) {
-		board_[row][column] = piece;
+		boardState[row][column] = piece;
 	}
 
 	void movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
-		Piece* piece = board_[fromPosition.first][fromPosition.second];
+		Piece* piece = boardState[fromPosition.first][fromPosition.second];
 		if ((piece != nullptr) && (piece->isValidMove(toPosition, fromPosition, *this))) {
 			piece->moveTo(toPosition);
-			board_[toPosition.first][toPosition.second] = piece;
-			board_[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
+			boardState[toPosition.first][toPosition.second] = piece;
+			boardState[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
 		}
 	}
 
@@ -85,7 +85,7 @@ public:
 		// trouve la position du roi sur le board
 		for (int row = 0; row < 8; row++) {
 			for (int column = 0; column < 8; column++) {
-				piece = board_[row][column];
+				piece = boardState[row][column];
 				if (piece != nullptr && piece->getPiece() == 'K' && piece->getColor() == color) {
 					kingPosition.first = row;
 					kingPosition.second = column;
@@ -111,7 +111,7 @@ public:
 		// check les pieces qui peuvent attaquer le roi
 		for (int row = 0; row < 8; ++row) {
 			for (int column = 0; column < 8; ++column) {
-				piece = board_[row][column];
+				piece = boardState[row][column];
 				piecePosition.first = row;
 				piecePosition.second = column;
 				if (piece != nullptr && piece->getColor() != color && piece->isValidMove(kingPosition, piecePosition, *this)) {
@@ -125,6 +125,10 @@ public:
 	bool boundaries(int row, int column) const {
 		return (row >= 0 && row < 8 && column >= 0 && column < 8); // retourne vrai si la piece sort pas du plateau
 	}
+	public slots:
+		void movePiece();
+	signals:
+	void pieceSelected();
 
 	// A TESTER
 	//bool isCheckmate(PieceColor color) {
