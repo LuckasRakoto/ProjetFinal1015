@@ -55,6 +55,9 @@
     <ClCompile Include="ClickabelLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Calc.hpp">
@@ -69,6 +72,9 @@
     <QtMoc Include="ClickabelLabel.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Board.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="King.hpp">
@@ -80,11 +86,28 @@
     <ClInclude Include="Knight.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Pieces.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="pieces\bbishop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pieces\bking.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pieces\bknight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pieces\wking.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pieces\wknight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pieces\wbishop.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

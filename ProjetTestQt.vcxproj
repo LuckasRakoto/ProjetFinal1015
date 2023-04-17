@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="bibliotheque_cours\bibliotheque_cours.cpp" />
     <ClCompile Include="bibliotheque_cours\verification_allocation.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Calc.cpp" />
     <ClCompile Include="CalcWindow.cpp" />
     <ClCompile Include="ClickabelLabel.cpp" />
@@ -134,10 +135,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.hpp" />
-    <ClInclude Include="Board.hpp" />
+    <QtMoc Include="Board.hpp" />
     <ClInclude Include="Knight.hpp" />
     <QtMoc Include="BoardWindow.hpp" />
     <ClInclude Include="King.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="pieces\bbishop.png" />
+    <Image Include="pieces\bking.png" />
+    <Image Include="pieces\bknight.png" />
+    <Image Include="pieces\wbishop.png" />
+    <Image Include="pieces\wking.png" />
+    <Image Include="pieces\wknight.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
