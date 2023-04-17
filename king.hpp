@@ -1,5 +1,6 @@
+#pragma once
 #include "Pieces.hpp"
-#include "Board.hpp"
+//#include "Board.hpp"
 
 class King : public Piece {
 public:
@@ -7,7 +8,7 @@ public:
 	King(PieceColor color, char piece) : Piece(color, 'K') {}
 	~King() = default;
 
-	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) override {
+	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) /*override*/ {
 
 		int diffRow = abs(newPosition.first - currentPosition.first);
 		int diffColumn = abs(newPosition.second - currentPosition.second);
@@ -15,11 +16,11 @@ public:
 		/*if (board.boundaries(newPosition.first, newPosition.second)) {*/
 		if (diffRow <= 1 && diffColumn <= 1) {
 			//Simule si le roi bouge sur la nouvelle case
-			Board boardCopy = board;
+			/*Board boardCopy = board;
 			boardCopy.movePiece(currentPosition, newPosition);
-			if (!boardCopy.isCheck(getColor())) {
+			if (!boardCopy.isCheck(getColor())) {*/
 				return true;
-			}
+			//}
 		}
 		else return false;
 		/*}*/
