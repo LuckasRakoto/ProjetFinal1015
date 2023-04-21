@@ -1,6 +1,6 @@
 #include "BoardWindow.hpp"
 
-BoardWindow::BoardWindow(QWidget* parent) : QMainWindow(parent) {
+GI::BoardWindow::BoardWindow(QWidget* parent) : QMainWindow(parent) {
 	auto widgetPrincipal = new QWidget(this);
 	widgetPrincipal->resize(400, 400);
 	auto layoutPrincipal = new QGridLayout(widgetPrincipal);
@@ -15,12 +15,12 @@ BoardWindow::BoardWindow(QWidget* parent) : QMainWindow(parent) {
 	}
 }
 
-BoardWindow::~BoardWindow() {
+GI::BoardWindow::~BoardWindow() {
 	delete board;
 }
 
-QLabel* BoardWindow::addSquare(const QString& text, int col, int row) {
-	QLabel* square = new ClickableLabel(col, row);
+QLabel* GI::BoardWindow::addSquare(const QString& text, int col, int row) {
+	QLabel* square = new CW::ClickableLabel(col, row);
 
 	square->setFixedSize(50,50);
 

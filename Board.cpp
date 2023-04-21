@@ -138,3 +138,17 @@ bool Board::isCheck(PieceColor color) {
 	}
 	return false;
 }
+
+void Board::kingCounter() {
+	int counter = 0;
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (boardState[i][j]->getPiece() == 'K') {
+				counter++;
+				if (counter > 2) {
+					throw std::logic_error("Plus que 2 rois");
+				}
+			}
+		}
+	}
+}

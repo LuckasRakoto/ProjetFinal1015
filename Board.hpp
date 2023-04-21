@@ -2,10 +2,12 @@
 
 #include <iostream>
 #include <QObject>
+#include <stdexcept>
 #include "Pieces.hpp"
 #include "King.hpp"
 #include "Knight.hpp"
 #include "Bishop.hpp"
+
 
 
 
@@ -32,10 +34,12 @@ public:
 	std::pair<int, int> findKing(PieceColor color) const;
 
 	bool isCheck(PieceColor color);
+	void kingCounter();
 
 	public slots:
 	signals:
 	void pieceSelected();
+
 
 	// A TESTER
 	//bool isCheckmate(PieceColor color) {

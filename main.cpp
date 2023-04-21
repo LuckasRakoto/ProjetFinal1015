@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);
 
-	BoardWindow boardWindow;
+	GI::BoardWindow boardWindow;
 	boardWindow.show();
 	return app.exec();
 }
