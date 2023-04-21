@@ -18,7 +18,7 @@ King::~King() {
 	count_--;
 }
 
-int King::count_ = 1;
+int King::count_ = 0;
 
 bool King::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
