@@ -97,7 +97,7 @@ std::pair<int, int> Board::findKing(PieceColor color) const {
 	throw ErrorNoPieceFound("No king found");*/
 }
 
-bool Board::isCheck(PieceColor color) const {
+bool Board::isCheck(PieceColor color) {
 	Piece* piece = nullptr;
 	std::pair<int, int> kingPosition = findKing(color);
 

@@ -44,10 +44,9 @@ public:
 
 	std::pair<int, int> findKing(PieceColor color) const;
 
-	bool isCheck(PieceColor color) const;
+	bool isCheck(PieceColor color);
 
 	public slots:
-		void movePiece();
 	signals:
 	void pieceSelected();
 

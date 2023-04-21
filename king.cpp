@@ -1,6 +1,6 @@
 #include "King.hpp"
 
-bool King::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, const Board& board) /*override*/ {
+bool King::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
 	int diffRow = abs(newPosition.first - currentPosition.first);
 	int diffColumn = abs(newPosition.second - currentPosition.second);
