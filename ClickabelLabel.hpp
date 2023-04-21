@@ -1,5 +1,4 @@
-#ifndef CLICKABEL_LABEL
-#define CLICKABEL_LABEL
+#pragma once
 
 #include <QLabel>
 #include <QWidget>
@@ -12,7 +11,7 @@ private:
 	int col;
 	int row;
 public:
-	explicit ClickableLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags(),int i,int j);
+	explicit ClickableLabel(int i, int j, QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
 	~ClickableLabel();
 
 signals:
@@ -21,5 +20,3 @@ signals:
 protected:
 	void mousePressEvent(QMouseEvent* event);
 };
-
-#endif

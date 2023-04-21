@@ -2,6 +2,7 @@
 
 BoardWindow::BoardWindow(QWidget* parent) : QMainWindow(parent) {
 	auto widgetPrincipal = new QWidget(this);
+	widgetPrincipal->resize(400, 400);
 	auto layoutPrincipal = new QGridLayout(widgetPrincipal);
 
 	board = new Board;
@@ -19,14 +20,16 @@ BoardWindow::~BoardWindow() {
 }
 
 QLabel* BoardWindow::addSquare(const QString& text, int col, int row) {
-	QLabel* square = new ClickableLabel();
+	QLabel* square = new ClickableLabel(col, row);
 
-	square->setFixedHeight(71);
-	square->setFixedWidth(71);
+	square->setFixedSize(50,50);
 
-	(col + row) % 2 == 0 ? square->setStyleSheet("background-color: rgb(31,85,6);") : square->setStyleSheet("background-color:rgb(213,255,208);");
+	(col + row) % 2 == 0 ? square->setStyleSheet("background-color: rgb(42, 68, 102);") : square->setStyleSheet("background-color:rgb(222, 222, 222);");
 	
 
-	if (board->getPiece(col, row) == nullptr) return square;
-	return nullptr;
+	if (board->getPiece(col, row) != nullptr) {
+
+	};
+	
+	return square;
 }

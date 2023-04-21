@@ -25,6 +25,22 @@ void Board::addPiece(Piece* piece, int row, int col) {
 	boardState[row][col] = piece;
 }
 
+void Board::printPieceAtPosition(std::pair<int, int> position) const {
+	int row = position.first;
+	int col = position.second;
+	Piece* piece = boardState[row][col];
+
+	if (piece == nullptr) {
+		std::cout << "No piece at position (" << row << ", " << col << ")" << std::endl;
+	}
+	else {
+		std::cout << "Piece at position (" << row << ", " << col << "): ";
+		std::cout << "Piece: " << piece->getPiece() << ", "; // K (King), B (Bishop) ou k (Knight)
+		std::cout << "Color: " << static_cast<int>(piece->getColor()) << std::endl; // imprime 0 pour White et 1 pour Black
+	}
+}
+
+
 Piece* Board::getPiece(int row, int col) const {
 	return boardState[row][col];;
 }

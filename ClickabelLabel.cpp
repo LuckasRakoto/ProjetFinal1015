@@ -1,7 +1,9 @@
 #include "ClickabelLabel.hpp"
 
-ClickableLabel::ClickableLabel(QWidget* parent, Qt::WindowFlags f,int i,int j) :
-	QLabel(parent), row(i), col(j) {}
+ClickableLabel::ClickableLabel(int i, int j, QWidget* parent, Qt::WindowFlags f) :
+	QLabel(parent),
+	row(i),
+	col(j){}
 
 
 ClickableLabel::~ClickableLabel() {}
@@ -9,6 +11,6 @@ ClickableLabel::~ClickableLabel() {}
 void ClickableLabel::mousePressEvent(QMouseEvent* event) {
 	int i = row;
 	int j = col;
-	std::cout << i << std::endl;
+	std::cout << i <<", " << j << std::endl;
 	emit clicked(i,j);
 }
