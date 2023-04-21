@@ -8,7 +8,7 @@ public:
 	/*Bishop(char color);*/ //positionner le fou à son endroit respectif pour sa couleur
 	Bishop(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'B', couleur) {} // creation bishop (B)
 	~Bishop() = default;
-	Bishop(PieceColor color, char piece) : Piece(color, 'B') {}
+	Bishop(PieceColor color) : Piece(color, 'B') {}
 
 	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board);
 };
