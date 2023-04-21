@@ -10,7 +10,7 @@
 //void testKing() {
 //	Board board; // create an empty chessboard
 //	King* king = new King({ 3, 3 }, PieceColor::White); // create a white king at position (3, 3)
-//	board.addPiece(king, 3, 3); // add the king to the board at its initial position
+//	board.addPiece(new King({ 0,4 }, PieceColor::White), 0, 4); // add the king to the board at its initial position
 //
 //	// Test case 1: King can move one step in any direction
 //

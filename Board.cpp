@@ -7,19 +7,21 @@ Board::Board() {
 			boardState[i][j] = nullptr;
 		}
 	}
+};
 
-	addPiece(new King({ 0,5 }, PieceColor::White), 0, 5);
+void Board::addPiecesOnBoard() {
+	addPiece(new King({ 0,4 }, PieceColor::White), 0, 4);
 	addPiece(new Bishop({ 0,2 }, PieceColor::White), 0, 2);
 	addPiece(new Bishop({ 0,5 }, PieceColor::White), 0, 5);
 	addPiece(new Knight({ 0,1 }, PieceColor::White), 0, 1);
 	addPiece(new Knight({ 0,6 }, PieceColor::White), 0, 6);
 
-	addPiece(new King({ 7,5 }, PieceColor::Black), 0, 5);
+	addPiece(new King({ 7,4 }, PieceColor::Black), 7, 4);
 	addPiece(new Bishop({ 7,2 }, PieceColor::Black), 7, 2);
 	addPiece(new Bishop({ 7,5 }, PieceColor::Black), 7, 5);
 	addPiece(new Knight({ 7,1 }, PieceColor::Black), 7, 1);
 	addPiece(new Knight({ 7,6 }, PieceColor::Black), 7, 6);
-};
+}
 
 void Board::addPiece(Piece* piece, int row, int col) {
 	boardState[row][col] = piece;
@@ -49,14 +51,22 @@ bool Board::boundaries(int row, int column) {
 	return (row >= 0 && row < 8 && column >= 0 && column < 8);
 }
 
-bool Board::checkIfPieceOnTile(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
-	if (boardState[newPosition.first][newPosition.second] != nullptr &&
-		boardState[newPosition.first][newPosition.second]->getColor() != boardState[currentPosition.first][currentPosition.second]->getColor()) {
-		return true; // Valid move to capture opponent's piece
+bool Board::checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
+	
+	if (boardState[currentPosition.first][currentPosition.second] != nullptr) {
+		if (boardState[newPosition.first][newPosition.second] != nullptr) {
+			PieceColor color = boardState[currentPosition.first][currentPosition.second]->getColor();
+			if (boardState[newPosition.first][newPosition.second]->getColor() != color) {
+				std::cout << "true\n";
+				return true; // Valid move to capture opponent's piece
+			}
+		}
+		else if (boardState[newPosition.first][newPosition.second] == nullptr) {
+			std::cout << "true2\n";
+			return true; // Valid move to an empty square
+		}
 	}
-	else if (boardState[newPosition.first][newPosition.second] == nullptr) {
-		return true; // Valid move to an empty square
-	}
+	std::cout << "false\n";
 	return false;
 }
 
@@ -81,6 +91,7 @@ bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> 
 		if (boardState[row][col] != nullptr /*|| !boundaries(row, col)*/) {
 			std::cout << boardState[row][col]->getPiece();
 			return false; // Path not clear
+
 		}
 	}
 	return true; // Path clear

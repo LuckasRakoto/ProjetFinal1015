@@ -5,7 +5,7 @@ bool Bishop::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> cu
 	int diffColumn = abs(newPosition.second - currentPosition.second);
 
 	if ((diffRow == diffColumn) && board.noPiecesOnPath(newPosition, currentPosition)) {
-		return board.checkIfPieceOnTile(newPosition, currentPosition);
+		return board.checkIfAbleToMove(newPosition, currentPosition);
 	}
 	else return false;
 }

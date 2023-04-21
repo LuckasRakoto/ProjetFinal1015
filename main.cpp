@@ -30,10 +30,38 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 }
 
 int main(int argc, char *argv[])
-{	/*
-	Board board;
-	Piece* myPiece = new King({1,1}, PieceColor::Black);
-	PiecePlacer placer(board, myPiece, { 2, 3 });*/
+{	
+
+	//TESTS:
+	//Board board;
+	//board.addPiecesOnBoard();
+	//board.printPieceAtPosition({ 0,4 });
+	//Piece* myPiece = new Knight({1,1}, PieceColor::Black);
+	//PiecePlacer placer(board, myPiece, { 2, 3 });
+
+	//if (board.boundaries(8, 3)) {
+	//	std::cout << " position on board\n";
+	//}
+
+	//if (board.checkIfAbleToMove({2 , 3}, {0 , 4})) { //prk ca prend current position??
+	//	std::cout << " piece on tile\n";
+	//}
+
+	//board.movePiece({ 2 , 3 }, {3, 5});
+	//board.printPieceAtPosition({ 3, 5 });
+
+	//board.printPieceAtPosition(board.findKing(PieceColor::White));
+
+	/*PiecePlacer whiteB(board, new Bishop({ 3,3 }, PieceColor::White), { 3, 3 });
+	PiecePlacer blackB(board, new Bishop({ 4,4 }, PieceColor::Black), { 4, 4 });
+	board.movePiece({ 4 , 4 }, { 3, 5 });
+	board.movePiece({ 4 , 4 }, { 2, 2 });
+	board.movePiece({ 4 , 4 }, { 5, 5 });
+	board.printPieceAtPosition({ 3, 5 });
+	board.printPieceAtPosition({ 2, 2 });
+	board.printPieceAtPosition({ 5, 5 });*/
+	
+
 	
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);

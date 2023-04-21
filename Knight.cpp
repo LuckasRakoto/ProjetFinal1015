@@ -1,13 +1,21 @@
 #include "Knight.hpp"
 
-bool Knight::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ { // verifie si deplacement = une case
+bool Knight::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
 	int diffRow = abs(newPosition.first - position_.first);
 	int diffColumn = abs(newPosition.second - position_.second);
-
+	std::cout << "diff row " << diffRow << "diff col " << diffColumn << std::endl;
+	std::cout << "1.\n";
 	if (board.boundaries(newPosition.first, newPosition.second)) {
-		if ((diffRow == 2 && diffColumn == 1) || (diffRow == 1 && diffColumn == 2)) return true;
-		else return false;
+		std::cout << "2.\n";
+		if ((diffRow == 2 && diffColumn == 1) || (diffRow == 1 && diffColumn == 2)) {
+			std::cout << "3.\n";
+			return true;
+			}
+		else {
+			std::cout << "4.\n";
+			return false;
+		}
 	}
 	else return false;
 }

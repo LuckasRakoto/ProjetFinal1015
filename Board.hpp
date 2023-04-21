@@ -17,6 +17,8 @@ private:
 	void addPiece(Piece* piece, int row, int col);
 public:
 	Board();
+	void addPiecesOnBoard();
+
 	Piece* getPiece(int row, int col) const;
 	bool boundaries(int row, int column);
 
@@ -27,6 +29,7 @@ public:
 			throw std::runtime_error("A piece is already on this tile");
 		}
 		p = piece;
+		//p->moveTo(tryPosition);
 		addPiece(p, tryPosition.first, tryPosition.second);
 	}
 
@@ -42,7 +45,7 @@ public:
 
 	void printPieceAtPosition(std::pair<int, int> position) const;
 
-	bool checkIfPieceOnTile(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
+	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
 
 	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
 
