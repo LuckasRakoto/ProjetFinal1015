@@ -20,6 +20,25 @@ public:
 	Piece* getPiece(int row, int col) const;
 	bool boundaries(int row, int column);
 
+	void placePiece(Piece* piece, std::pair<int, int> tryPosition) {
+		Piece* p = boardState[tryPosition.first][tryPosition.second];
+		
+		if (p != nullptr) {
+			throw std::runtime_error("A piece is already on this tile");
+		}
+		p = piece;
+		addPiece(p, tryPosition.first, tryPosition.second);
+	}
+
+	~Board() {
+		for (int i = 0; i < 8; ++i) {
+			for (int j = 0; j < 8; ++j) {
+				Piece* piece = boardState[i][j];
+				if (piece != nullptr)
+					delete piece;
+			}
+		}
+	}
 
 	void printPieceAtPosition(std::pair<int, int> position) const;
 
