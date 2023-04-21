@@ -1,5 +1,25 @@
 #include "King.hpp"
 
+King::King(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'K', couleur) {
+	count_++;
+	if (count_ > 2) {
+		throw std::logic_error("Plus que 2 rois");
+	}
+}
+
+King::King(PieceColor color) : Piece(color, 'K') {
+	count_++;
+	if (count_ > 2) {
+		throw std::logic_error("Plus que 2 rois");
+	}
+}
+
+King::~King() {
+	count_--;
+}
+
+int King::count_ = 0;
+
 bool King::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
 	int diffRow = abs(newPosition.first - currentPosition.first);
