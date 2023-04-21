@@ -2,14 +2,14 @@
 
 King::King(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'K', couleur) {
 	count_++;
-	if (count_ >= 2) {
+	if (count_ > 2) {
 		throw std::logic_error("Plus que 2 rois");
 	}
 }
 
 King::King(PieceColor color) : Piece(color, 'K') {
 	count_++;
-	if (count_ >= 2) {
+	if (count_ > 2) {
 		throw std::logic_error("Plus que 2 rois");
 	}
 }
