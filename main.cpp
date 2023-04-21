@@ -1,5 +1,6 @@
 ﻿#include "Board.hpp"
 #include "BoardWindow.hpp"
+#include "PiecePlacer.hpp"
 
 #include <QApplication>
 #if __has_include("bibliotheque_cours.hpp")
@@ -29,7 +30,11 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 }
 
 int main(int argc, char *argv[])
-{
+{	/*
+	Board board;
+	Piece* myPiece = new King({1,1}, PieceColor::Black);
+	PiecePlacer placer(board, myPiece, { 2, 3 });*/
+	
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
 	initialiserBibliothequeCours(argc, argv);

@@ -28,4 +28,5 @@ public:
 	// GETTERS
 	char getPiece() const { return piece_; }
 	PieceColor getColor() const { return color_; }
+	std::pair<int, int> getPosition() const { return position_; }
 };
