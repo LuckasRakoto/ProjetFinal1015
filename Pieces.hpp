@@ -1,5 +1,6 @@
 #pragma once
 #include <utility>
+#include <string>
 //#include <QObject>
 
 
@@ -15,6 +16,7 @@ protected:
 	std::pair<int, int> position_; //{row, col}
 	char piece_;
 	PieceColor color_;
+	std::string image_;
 
 public:
 	explicit Piece(std::pair<int, int> position, char piece, PieceColor color) : position_(position), piece_(piece), color_(color) {}; //Constructeur; prk explicit? -> on veut pas de conversion pas explicite
@@ -29,4 +31,6 @@ public:
 	char getPiece() const { return piece_; }
 	PieceColor getColor() const { return color_; }
 	std::pair<int, int> getPosition() const { return position_; }
+
+	std::string getImage() const { return image_; }
 };

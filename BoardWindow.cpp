@@ -26,9 +26,11 @@ QLabel* GI::BoardWindow::addSquare(const QString& text, int col, int row) {
 
 	(col + row) % 2 == 0 ? square->setStyleSheet("background-color: rgb(42, 68, 102);") : square->setStyleSheet("background-color:rgb(222, 222, 222);");
 	
-
-	if (board->getPiece(col, row) != nullptr) {
-
+	Piece* piecePtr = board->getPiece(col, row);
+	if (piecePtr != nullptr) { // image doesnt show
+		std::string imageStr = piecePtr->getImage();
+		QPixmap pixmap(imageStr.c_str());
+		square->setPixmap(pixmap);
 	};
 	
 	return square;

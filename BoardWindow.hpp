@@ -4,6 +4,8 @@
 #include <QGridLayout>
 #include <QString>
 #include <QLabel>
+#include <string>
+#include <QPixmap>
 
 #include "Board.hpp"
 #include "ClickabelLabel.hpp"

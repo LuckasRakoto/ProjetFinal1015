@@ -1,5 +1,14 @@
 #include "Knight.hpp"
 
+Knight::Knight(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'N', couleur) {
+	if (couleur == PieceColor::White) {
+		image_ = "./pieces/wknight.png";
+	}
+	else if (couleur == PieceColor::Black) {
+		image_ = "./pieces/bknight.png";
+	}
+}
+
 bool Knight::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
 	int diffRow = abs(newPosition.first - position_.first);

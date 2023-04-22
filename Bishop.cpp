@@ -9,3 +9,12 @@ bool Bishop::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> cu
 	}
 	else return false;
 }
+
+Bishop::Bishop(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'B', couleur) {
+	if (couleur == PieceColor::White) {
+		image_ = "./pieces/wbishop.png";
+	}
+	else if (couleur == PieceColor::Black) {
+		image_ = "./pieces/bbishop.png";
+	}
+}
