@@ -2,10 +2,10 @@
 
 Knight::Knight(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'N', couleur) {
 	if (couleur == PieceColor::White) {
-		image_ = "./pieces/wknight.png";
+		image_ = "pieces/wknight.png";
 	}
 	else if (couleur == PieceColor::Black) {
-		image_ = "./pieces/bknight.png";
+		image_ = "pieces/bknight.png";
 	}
 }
 

@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <string>
 #include <QPixmap>
+#include <iostream>
 
 #include "Board.hpp"
 #include "ClickabelLabel.hpp"
