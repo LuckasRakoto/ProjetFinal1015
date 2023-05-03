@@ -14,23 +14,20 @@ class Board: public QObject {
 	Q_OBJECT
 private:
 	Piece* boardState[8][8];
-	void addPiece(Piece* piece, int row, int col);
 public:
 	Board();
+	void addPiece(Piece* piece, int row, int col);
 	void addPiecesOnBoard();
 
 	Piece* getPiece(int row, int col) const;
 	bool boundaries(int row, int column);
 
-	void placePiece(Piece* piece, std::pair<int, int> tryPosition) {
-		Piece* p = boardState[tryPosition.first][tryPosition.second];
+	void placePiece(Piece* piece, std::pair<int, int> currentPosition, std::pair<int, int> tryPosition) {
+		Piece* pieceOnTile = boardState[tryPosition.first][tryPosition.second];
 		
-		if (p != nullptr) {
-			throw std::runtime_error("A piece is already on this tile");
-		}
-		p = piece;
-		//p->moveTo(tryPosition);
-		addPiece(p, tryPosition.first, tryPosition.second);
+		if (pieceOnTile != nullptr) throw std::runtime_error("A piece is already on this tile");
+
+		movePiece(currentPosition, tryPosition);
 	}
 
 	~Board() {
@@ -43,9 +40,9 @@ public:
 		}
 	}
 
-	void printPieceAtPosition(std::pair<int, int> position) const;
+	void printPieceAtPosition(std::pair<int, int> position);
 
-	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
+	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition);
 
 	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
 

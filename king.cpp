@@ -1,5 +1,4 @@
 #include "King.hpp"
-#include <iostream>
 
 King::King(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'K', couleur) {
 	count_++;
@@ -34,18 +33,13 @@ bool King::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> curr
 	int diffRow = abs(newPosition.first - currentPosition.first);
 	int diffColumn = abs(newPosition.second - currentPosition.second);
 
-	/*if (board.boundaries(newPosition.first, newPosition.second)) {*/
 	if (diffRow <= 1 && diffColumn <= 1) {
 		//Simule si le roi bouge sur la nouvelle case
 		/*Board boardCopy = board;
 		boardCopy.movePiece(currentPosition, newPosition);
 		if (!boardCopy.isCheck(getColor())) {*/
-		return true;
+		return board.checkIfAbleToMove(newPosition, currentPosition);
 		//}
 	}
-	else return false;
-	/*}*/
-	/*else {
-		return false;
-	}*/
+	return false;
 }

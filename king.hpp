@@ -1,7 +1,8 @@
 #pragma once
 #include "Pieces.hpp"
+#include "Board.hpp"
 #include <stdexcept>
-//#include "Board.hpp"
+#include <iostream>
 
 class King : public Piece {
 private:

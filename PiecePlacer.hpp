@@ -9,25 +9,27 @@
 
 class PiecePlacer {
 public:
-	PiecePlacer(Board& board, Piece* piece, std::pair<int, int> newPosition) : board_(board), tryPosition_(newPosition) {
-		std::pair<int, int> currentPosition = piece->getPosition();
-		if (!piece->isValidMove(newPosition, currentPosition, board)) {
+	PiecePlacer(Board& board, Piece* piece, std::pair<int, int> newPosition) : boardCopy_(board), tryPosition_(newPosition) {
+		currentPosition_ = piece->getPosition();
+		if (!piece->isValidMove(newPosition, currentPosition_, board) && (newPosition != currentPosition_)) {
 			cancelled_ = true;
 		}
 		else {
-			board_.placePiece(piece, tryPosition_);
+			boardCopy_.placePiece(piece, currentPosition_, tryPosition_);
 			cancelled_ = false;
 		}
 	}
 
 	~PiecePlacer() {
-		if (cancelled_ == false) {
-			board_.placePiece(nullptr, tryPosition_);
+		if (!cancelled_) {
+			boardCopy_.placePiece(nullptr, currentPosition_, tryPosition_);
 		}
 	}
 
+
 private:
-	Board& board_;
+	Board& boardCopy_;
+	std::pair<int, int> currentPosition_;
 	std::pair<int, int> tryPosition_;
 	bool cancelled_;
 };
