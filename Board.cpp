@@ -47,7 +47,7 @@ void Board::addPiece(Piece* piece, int row, int col) {
 	boardState[row][col] = piece;
 }
 
-void Board::printPieceAtPosition(std::pair<int, int> position) const {
+void Board::printPieceAtPosition(std::pair<int, int> position) {
 	int row = position.first;
 	int col = position.second;
 	Piece* piece = boardState[row][col];
@@ -58,7 +58,12 @@ void Board::printPieceAtPosition(std::pair<int, int> position) const {
 	else {
 		std::cout << "Piece at position (" << row << ", " << col << "): ";
 		std::cout << "Piece: " << piece->getPiece() << ", "; // K (King), B (Bishop) ou k (Knight)
-		std::cout << "Color: " << static_cast<int>(piece->getColor()) << std::endl; // imprime 0 pour White et 1 pour Black
+		if (static_cast<int>(piece->getColor()) == 0) { // 0 pour White et 1 pour Black
+			std::cout << "Color: White" << std::endl;
+		}
+		else {
+			std::cout << "Color: Black" << std::endl;
+		}
 	}
 }
 
@@ -71,22 +76,19 @@ bool Board::boundaries(int row, int column) {
 	return (row >= 0 && row < 8 && column >= 0 && column < 8);
 }
 
-bool Board::checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
+bool Board::checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) {
 	
-	if (boardState[currentPosition.first][currentPosition.second] != nullptr) {
+	if ((boardState[currentPosition.first][currentPosition.second] != nullptr) && (boundaries(newPosition.first, newPosition.second))) {
 		if (boardState[newPosition.first][newPosition.second] != nullptr) {
 			PieceColor color = boardState[currentPosition.first][currentPosition.second]->getColor();
 			if (boardState[newPosition.first][newPosition.second]->getColor() != color) {
-				std::cout << "true\n";
 				return true; // Valid move to capture opponent's piece
 			}
 		}
 		else if (boardState[newPosition.first][newPosition.second] == nullptr) {
-			std::cout << "true2\n";
 			return true; // Valid move to an empty square
 		}
 	}
-	std::cout << "false\n";
 	return false;
 }
 
@@ -106,8 +108,6 @@ bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> 
 	for (int i = 1; i < rowDiff; ++i) {
 		row = currentPosition.first + i * rowMove;
 		col = currentPosition.second + i * columnMove;
-		std::cout << row << std::endl;
-		std::cout << col << std::endl;
 		if (boardState[row][col] != nullptr /*|| !boundaries(row, col)*/) {
 			std::cout << boardState[row][col]->getPiece();
 			return false; // Path not clear
@@ -125,6 +125,9 @@ bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPo
 		boardState[toPosition.first][toPosition.second] = piece;
 		boardState[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
 		return true;
+	}
+	else {
+		std::cout << "Don't move piece\n";
 	}
 }
 

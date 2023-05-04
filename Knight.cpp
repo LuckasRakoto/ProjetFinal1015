@@ -11,15 +11,15 @@ Knight::Knight(std::pair<int, int> position, PieceColor couleur) : Piece(positio
 
 bool Knight::isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) /*override*/ {
 
-	int diffRow = abs(newPosition.first - position_.first);
-	int diffColumn = abs(newPosition.second - position_.second);
+	int diffRow = abs(newPosition.first - currentPosition.first);
+	int diffColumn = abs(newPosition.second - currentPosition.second);
 	std::cout << "diff row " << diffRow << "diff col " << diffColumn << std::endl;
 	std::cout << "1.\n";
 	if (board.boundaries(newPosition.first, newPosition.second)) {
 		std::cout << "2.\n";
 		if ((diffRow == 2 && diffColumn == 1) || (diffRow == 1 && diffColumn == 2)) {
 			std::cout << "3.\n";
-			return true;
+			return board.checkIfAbleToMove(newPosition, currentPosition);
 			}
 		else {
 			std::cout << "4.\n";

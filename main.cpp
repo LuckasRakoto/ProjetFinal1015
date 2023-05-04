@@ -33,35 +33,62 @@ int main(int argc, char *argv[])
 {	
 
 	//TESTS:
-	//Board board;
-	//board.addPiecesOnBoard();
-	//board.printPieceAtPosition({ 0,4 });
-	//Piece* myPiece = new Knight({1,1}, PieceColor::Black);
-	//PiecePlacer placer(board, myPiece, { 2, 3 });
+	Board board;
+	board.addPiecesOnBoard();
+	/*board.printPieceAtPosition({ 0,4 });
+	board.printPieceAtPosition({ 7,4 });
+	board.printPieceAtPosition({ 0,6 });
+	board.printPieceAtPosition({ 0,0 });*/
+	
+	/*Piece* myPiece = new Knight({1,1}, PieceColor::Black);
+	PiecePlacer placer(board, myPiece, { 2, 3 });*/ // fonctionne!!
 
-	//if (board.boundaries(8, 3)) {
-	//	std::cout << " position on board\n";
+	/*board.printPieceAtPosition({ 1,1 });
+	board.printPieceAtPosition({ 2,3 });*/
+
+	//if (board.checkIfAbleToMove({2 , 3}, {1 , 4})) { // fonctionne
+	//	std::cout << "Piece able to move\n";
 	//}
 
-	//if (board.checkIfAbleToMove({2 , 3}, {0 , 4})) { //prk ca prend current position??
-	//	std::cout << " piece on tile\n";
-	//}
+	//board.movePiece({ 0 , 4 }, { 1, 5 }); //deplacement basique roi fonctionne 
+	//board.printPieceAtPosition({ 0, 4 });
+	//board.printPieceAtPosition({ 1, 5 });
 
-	//board.movePiece({ 2 , 3 }, {3, 5});
+	//board.movePiece({ 2 , 3 }, {3, 5}); //deplacement basique cavalier fonctionne 
+	//board.printPieceAtPosition({ 2, 3 });
 	//board.printPieceAtPosition({ 3, 5 });
 
-	//board.printPieceAtPosition(board.findKing(PieceColor::White));
+	//board.movePiece({ 0 , 2 }, {2, 4}); //deplacement basique cavalier fonctionne 
+	//board.printPieceAtPosition({ 0, 2 });
+	//board.printPieceAtPosition({ 2, 4 });
+	
+	//board.printPieceAtPosition(board.findKing(PieceColor::White)); // fonctionne
 
-	/*PiecePlacer whiteB(board, new Bishop({ 3,3 }, PieceColor::White), { 3, 3 });
-	PiecePlacer blackB(board, new Bishop({ 4,4 }, PieceColor::Black), { 4, 4 });
-	board.movePiece({ 4 , 4 }, { 3, 5 });
+	Piece* wBishop = new Bishop({ 3,3 }, PieceColor::Black);
+	Piece* bBishop = new Bishop({ 4,4 }, PieceColor::Black);
+	board.addPiece(wBishop, 3, 3);
+	board.addPiece(bBishop, 4, 4);
+	/*PiecePlacer whiteB(board, wBishop, { 3, 3 });
+	PiecePlacer blackB(board, bBishop, { 4, 4 });*/
+
+	board.movePiece({ 4 , 4 }, { 6, 5 });
 	board.movePiece({ 4 , 4 }, { 2, 2 });
 	board.movePiece({ 4 , 4 }, { 5, 5 });
-	board.printPieceAtPosition({ 3, 5 });
-	board.printPieceAtPosition({ 2, 2 });
-	board.printPieceAtPosition({ 5, 5 });*/
-	
 
+	board.printPieceAtPosition({ 4, 4 });
+	board.printPieceAtPosition({ 6, 5 });
+	board.printPieceAtPosition({ 2, 2 }); // fonctionne: fou detecte qu'une piece bloque son passage
+	board.printPieceAtPosition({ 5, 5 }); // fonctionne
+	
+	Piece* myPiece = new Knight({ 1,1 }, PieceColor::Black);
+	board.addPiece(myPiece, 1, 1);
+	//PiecePlacer placer(board, myPiece, { 1, 1 }); // fonctionne!!
+	Piece* myPiece2 = new Knight({ 2,3 }, PieceColor::Black);
+	board.addPiece(myPiece2, 2, 3);
+	//PiecePlacer placer2(board, myPiece2, { 2, 3 }); // fonctionne!!
+	board.movePiece({ 1 , 1 }, { 2, 3 });
+	board.printPieceAtPosition({ 2, 3 });
+	board.printPieceAtPosition({ 1, 1 });
 	
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
