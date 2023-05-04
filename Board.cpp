@@ -1,13 +1,33 @@
 #include "Board.hpp"
 
-Board::Board() {
-
+Board::Board(): pieceSelected(false), whiteTurn(true) {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			boardState[i][j] = nullptr;
 		}
 	}
 };
+
+void Board::placePiece(Piece* piece, std::pair<int, int> tryPosition) {
+	Piece* p = boardState[tryPosition.first][tryPosition.second];
+
+	if (p != nullptr) {
+		throw std::runtime_error("A piece is already on this tile");
+	}
+	p = piece;
+	//p->moveTo(tryPosition);
+	addPiece(p, tryPosition.first, tryPosition.second);
+}
+
+Board::~Board() {
+	for (int i = 0; i < 8; ++i) {
+		for (int j = 0; j < 8; ++j) {
+			Piece* piece = boardState[i][j];
+			if (piece != nullptr)
+				delete piece;
+		}
+	}
+}
 
 void Board::addPiecesOnBoard() {
 	addPiece(new King({ 0,4 }, PieceColor::White), 0, 4);
@@ -44,7 +64,7 @@ void Board::printPieceAtPosition(std::pair<int, int> position) const {
 
 
 Piece* Board::getPiece(int row, int col) const {
-	return boardState[row][col];;
+	return boardState[row][col];
 }
 
 bool Board::boundaries(int row, int column) {
@@ -97,12 +117,14 @@ bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> 
 	return true; // Path clear
 }
 
-void Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
+bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
 	Piece* piece = boardState[fromPosition.first][fromPosition.second];
-	if ((piece != nullptr) && (piece->isValidMove(toPosition, fromPosition, *this))) {
+	if (!(piece->isValidMove(toPosition, fromPosition, *this))) return false;
+	if (piece != nullptr) {
 		piece->moveTo(toPosition);
 		boardState[toPosition.first][toPosition.second] = piece;
 		boardState[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
+		return true;
 	}
 }
 
@@ -148,4 +170,35 @@ bool Board::isCheck(PieceColor color) {
 		}
 	}
 	return false;
+}
+
+void Board::selectPiece(int row, int col) {
+	if (boardState[row][col]->getColor() == PieceColor::White && whiteTurn) {
+		pieceSelected = true;
+		selectedPiecePos = { row, col };
+		return;
+	}
+	else if ((boardState[row][col]->getColor() == PieceColor::Black && !whiteTurn)){
+		pieceSelected = true;
+		selectedPiecePos = { row, col };
+		return;
+	}
+	else return;
+
+}
+
+void Board::isClicked(int i, int j) {
+	if (!pieceSelected && boardState[i][j] != nullptr) {
+		selectPiece(i,j);
+		std::cout << "on selectionnne" << std::endl;
+		return;
+	}
+	else if (pieceSelected) {
+		if (!(movePiece(selectedPiecePos, { i,j }))) return;
+		pieceSelected = false;
+		std::cout << "on bouge" << std::endl;
+		whiteTurn = !whiteTurn;
+		emit boardChanged();
+	}
+
 }

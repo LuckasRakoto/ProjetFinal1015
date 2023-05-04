@@ -18,9 +18,12 @@ namespace GI { //GI = graphical interface
 	public:
 		BoardWindow(QWidget* parent = nullptr);
 		~BoardWindow() override;
-		QLabel* addSquare(const QString& text, int col, int row);
-
+		CW::ClickableLabel* addSquare(const QString& text, int col, int row);
+		void render();
 	private:
 		Board* board;
+		QGridLayout* mainLayout;
+	public slots:
+		void hasChanged();
 	};
 }

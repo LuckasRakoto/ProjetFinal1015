@@ -6,7 +6,7 @@
 #include <iostream>
 
 namespace CW { //CW= custom widgets
-	class ClickableLabel : public QLabel {
+	class ClickableLabel : public QLabel { //inspiré de https://wiki.qt.io/Clickable_QLabel
 		Q_OBJECT
 	private:
 		int col;

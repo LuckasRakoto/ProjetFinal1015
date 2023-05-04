@@ -11,6 +11,5 @@ CW::ClickableLabel::~ClickableLabel() {}
 void CW::ClickableLabel::mousePressEvent(QMouseEvent* event) {
 	int i = row;
 	int j = col;
-	std::cout << i <<", " << j << std::endl;
 	emit clicked(i,j);
 }

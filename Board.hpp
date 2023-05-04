@@ -7,59 +7,39 @@
 #include "Knight.hpp"
 #include "Bishop.hpp"
 
-
-
-
 class Board: public QObject {
 	Q_OBJECT
 private:
 	Piece* boardState[8][8];
 	void addPiece(Piece* piece, int row, int col);
+	std::pair<int, int> selectedPiecePos;
+	bool pieceSelected;
+	bool whiteTurn;
 public:
 	Board();
+	~Board();
+
 	void addPiecesOnBoard();
-
-	Piece* getPiece(int row, int col) const;
-	bool boundaries(int row, int column);
-
-	void placePiece(Piece* piece, std::pair<int, int> tryPosition) {
-		Piece* p = boardState[tryPosition.first][tryPosition.second];
-		
-		if (p != nullptr) {
-			throw std::runtime_error("A piece is already on this tile");
-		}
-		p = piece;
-		//p->moveTo(tryPosition);
-		addPiece(p, tryPosition.first, tryPosition.second);
-	}
-
-	~Board() {
-		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 8; ++j) {
-				Piece* piece = boardState[i][j];
-				if (piece != nullptr)
-					delete piece;
-			}
-		}
-	}
-
+	void placePiece(Piece* piece, std::pair<int, int> tryPosition);
 	void printPieceAtPosition(std::pair<int, int> position) const;
+	void selectPiece(int i, int j);
+	
+	Piece* getPiece(int row, int col) const;
 
+	bool boundaries(int row, int column);
 	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
-
+	bool movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition);
 	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
-
-
-	void movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition);
+	bool isCheck(PieceColor color);
 
 	std::pair<int, int> findKing(PieceColor color) const;
 
-	bool isCheck(PieceColor color);
 
-	public slots:
-	signals:
-	void pieceSelected();
+public slots:
+	void isClicked(int i, int j);
 
+signals:
+	void boardChanged();
 
 	// A TESTER
 	//bool isCheckmate(PieceColor color) {
