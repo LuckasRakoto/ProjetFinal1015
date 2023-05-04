@@ -21,15 +21,15 @@ public:
 
 	void addPiecesOnBoard();
 	void placePiece(Piece* piece, std::pair<int, int> tryPosition);
-	void printPieceAtPosition(std::pair<int, int> position) const;
+	void printPieceAtPosition(std::pair<int, int> position);
 	void selectPiece(int i, int j);
 	
 	Piece* getPiece(int row, int col) const;
 
 	bool boundaries(int row, int column);
-	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
+	bool checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition);
 	bool movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition);
-	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const;
+	bool noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition);
 	bool isCheck(PieceColor color);
 
 	std::pair<int, int> findKing(PieceColor color) const;

@@ -15,14 +15,14 @@ public:
 			cancelled_ = true;
 		}
 		else {
-			boardCopy_.placePiece(piece, currentPosition_, tryPosition_);
+			boardCopy_.placePiece(piece, tryPosition_);
 			cancelled_ = false;
 		}
 	}
 
 	~PiecePlacer() {
 		if (!cancelled_) {
-			boardCopy_.placePiece(nullptr, currentPosition_, tryPosition_);
+			boardCopy_.placePiece(nullptr, tryPosition_);
 		}
 	}
 

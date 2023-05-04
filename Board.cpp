@@ -92,7 +92,7 @@ bool Board::checkIfAbleToMove(std::pair<int, int> newPosition, std::pair<int, in
 	return false;
 }
 
-bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) const {
+bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> currentPosition) {
 	int rowDiff = abs(newPosition.first - currentPosition.first);
 	int rowMove = 0;
 	int columnMove = 0;
