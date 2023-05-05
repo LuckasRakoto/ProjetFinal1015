@@ -124,6 +124,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="BoardWindow.cpp" />
     <ClCompile Include="Pieces.cpp" />
+    <ClCompile Include="PiecePlacer.cpp" />
     <ClCompile Include="TestCalc.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ClickabelLabel.hpp" />
+    <ClInclude Include="PiecePlacer.hpp" />
     <ClInclude Include="Pieces.hpp" />
   </ItemGroup>
   <ItemGroup>
