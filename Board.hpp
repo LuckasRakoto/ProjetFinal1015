@@ -19,6 +19,25 @@ public:
 	Board();
 	~Board();
 
+	// Copy constructor
+	Board(const Board& other) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Piece* piece = other.boardState[i][j];
+				if (piece != nullptr) {
+					Piece* newPiece = piece->clone();
+					boardState[i][j] = newPiece;
+				}
+				else {
+					boardState[i][j] = nullptr;
+				}
+			}
+		}
+		selectedPiecePos = other.selectedPiecePos;
+		pieceSelected = other.pieceSelected;
+		whiteTurn = other.whiteTurn;
+	}
+
 	void addPiecesOnBoard();
 	void placePiece(Piece* piece, std::pair<int, int> tryPosition);
 	void printPieceAtPosition(std::pair<int, int> position);

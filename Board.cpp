@@ -119,16 +119,39 @@ bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> 
 
 bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
 	Piece* piece = boardState[fromPosition.first][fromPosition.second];
-	if (!(piece->isValidMove(toPosition, fromPosition, *this))) return false;
+	std::pair<int, int> kingPosition;
+
+	if (piece->getColor() == PieceColor::White) {
+		kingPosition = findKing(PieceColor::Black);
+		std::cout << "Opponent piece: Black\n";
+	}
+	else {
+		kingPosition = findKing(PieceColor::White);
+		std::cout << "Opponent piece: White\n";
+	}
+
+	if (King* k = dynamic_cast<King*>(piece)) {
+		if (k->leaveSpaceBetweenKings(toPosition, kingPosition)) {
+			std::cout << "Kings too close\n";
+			return false;
+		}
+	}
+
+	if (!(piece->isValidMove(toPosition, fromPosition, *this))) {
+		std::cout << "Don't move piece\n";
+		return false;
+	}
+	if (toPosition == kingPosition) {
+		std::cout << "Don't move piece (King position)\n";
+		return false;
+	}
 	if (piece != nullptr) {
 		piece->moveTo(toPosition);
 		boardState[toPosition.first][toPosition.second] = piece;
 		boardState[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
 		return true;
 	}
-	else {
-		std::cout << "Don't move piece\n";
-	}
+	return false;
 }
 
 std::pair<int, int> Board::findKing(PieceColor color) const {
@@ -145,22 +168,14 @@ std::pair<int, int> Board::findKing(PieceColor color) const {
 				return kingPosition;
 			}
 		}
-	}/*
-	throw ErrorNoPieceFound("No king found");*/
+	}
 }
 
 bool Board::isCheck(PieceColor color) {
 	Piece* piece = nullptr;
 	std::pair<int, int> kingPosition = findKing(color);
-
-	/*try { std::pair<int, int> kingPosition = findKing(color); }
-	catch (ErrorNoPieceFound& e) {
-		Board board;
-		Piece* piece = new King(PieceColor::White, 'K');
-		board.addPiece(piece, 7, 7);
-		std::cout << "Erreur: " << e.what() << std::endl;
-	}*/
 	std::pair<int, int> piecePosition;
+
 	// check les pieces qui peuvent attaquer le roi
 	for (int row = 0; row < 8; ++row) {
 		for (int column = 0; column < 8; ++column) {

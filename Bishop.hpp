@@ -10,5 +10,9 @@ public:
 	~Bishop() = default;
 	Bishop(PieceColor color) : Piece(color, 'B') {}
 
+	virtual Bishop* clone() const override {
+		return new Bishop(*this);
+	}
+
 	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) override;
 };

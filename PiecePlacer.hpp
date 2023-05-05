@@ -1,5 +1,4 @@
 #pragma once
-#include "Pieces.hpp"
 #include "Board.hpp"
 
 // Classe implementant le RAII: 
@@ -16,6 +15,7 @@ public:
 		}
 		else {
 			boardCopy_.placePiece(piece, tryPosition_);
+			boardCopy_.placePiece(nullptr, currentPosition_);
 			cancelled_ = false;
 		}
 	}
@@ -26,6 +26,9 @@ public:
 		}
 	}
 
+	bool isCancelled() const {
+		return cancelled_;
+	}
 
 private:
 	Board& boardCopy_;

@@ -9,5 +9,9 @@ public:
 	~Knight() = default;
 	Knight(PieceColor color) : Piece(color, 'k') {}
 
+	virtual Knight* clone() const override {
+		return new Knight(*this);
+	}
+
 	bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) override;
 };

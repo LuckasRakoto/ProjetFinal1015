@@ -26,6 +26,7 @@ public:
 	virtual ~Piece() = default;
 
 	virtual bool isValidMove(std::pair<int, int> newPosition, std::pair<int, int> currentPosition, Board& board) = 0; //Validation du move
+	virtual Piece* clone() const = 0;
 
 	void moveTo(std::pair<int, int> newPosition);
 
