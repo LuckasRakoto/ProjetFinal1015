@@ -1,6 +1,6 @@
 ﻿#include "Board.hpp"
 #include "BoardWindow.hpp"
-#include "PiecePlacer.hpp"
+//#include "PiecePlacer.hpp"
 
 #include <QApplication>
 #if __has_include("bibliotheque_cours.hpp")

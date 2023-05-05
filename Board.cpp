@@ -146,10 +146,20 @@ bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPo
 		std::cout << "Don't move piece (King position)\n";
 		return false;
 	}
+	bool isStillInCheck = false;
 
 	if (isCheck(color)) {
 		if (King* k = dynamic_cast<King*>(piece)) {
-			std::cout << "King moved out of check\n";
+			if (isCheckmate(color, kingPosition)) {
+				std::cout << "King in checkmate\n";
+			}
+
+			isStillInCheck = stillInCheck(color, toPosition);
+
+			if (isStillInCheck) { //si roi est encore en echec, retourne faux
+				std::cout << "King still in check\n";
+				return false;
+			}
 		}
 		else {
 			std::cout << "King is in check\n";
@@ -160,7 +170,7 @@ bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPo
 	if (piece != nullptr) {
 		piece->moveTo(toPosition);
 		boardState[toPosition.first][toPosition.second] = piece;
-		boardState[fromPosition.first][fromPosition.second] = nullptr; // a verifier que ca marche vraiment
+		boardState[fromPosition.first][fromPosition.second] = nullptr;
 		return true;
 	}
 	return false;
@@ -183,6 +193,24 @@ std::pair<int, int> Board::findKing(PieceColor color) const {
 	}
 }
 
+bool Board::stillInCheck(PieceColor color, std::pair<int, int> newKingPosition) {
+	Piece* piece = nullptr;
+	std::pair<int, int> piecePosition;
+
+	for (int row = 0; row < 8; ++row) {
+		for (int column = 0; column < 8; ++column) {
+			piece = boardState[row][column];
+			piecePosition.first = row;
+			piecePosition.second = column;
+			if (piece != nullptr && piece->getColor() != color && piece->isValidMove(newKingPosition, piecePosition, *this)) {
+				std::cout << "King still in check\n";
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 bool Board::isCheck(PieceColor color) {
 	Piece* piece = nullptr;
 	std::pair<int, int> kingPosition = findKing(color);
@@ -201,6 +229,65 @@ bool Board::isCheck(PieceColor color) {
 		}
 	}
 	return false;
+}
+
+bool Board::isCheckmate(PieceColor color, std::pair<int, int> kingPosition) {
+	std::pair<int, int> newPosition;
+	std::pair<int, int> piecePosition;
+
+	int kingRow = kingPosition.first;
+	int kingColumn = kingPosition.second;
+	Piece* king = boardState[kingRow][kingColumn];
+	bool isStillInCheck;
+	// check si le roi peut bouger
+	for (int row = kingRow - 1; row < kingRow + 1; ++row) {
+		for (int column = kingColumn - 1; column < kingColumn + 1; ++column) {
+			if (boundaries(row, column) && (row != kingRow || column != kingRow)) {
+				newPosition.first = row;
+				newPosition.second = column;
+				if (king->isValidMove(newPosition, kingPosition, *this)) {
+					// If the king can move to the new position, return false
+					isStillInCheck = stillInCheck(color, newPosition);
+					
+					if (!isStillInCheck) {
+						return false;
+					}
+				}
+			}
+		}
+	}
+
+	
+	//Piece* piece;
+	//// check si une autre piece du joueur peut bloquer le check
+	//for (int row = 0; row < 8; ++row) {
+	//	for (int column = 0; column < 8; ++column) {
+	//		piece = boardState[row][column];
+	//		if (piece != nullptr && piece->getColor() == color) {
+	//			for (int newRow = 0; newRow < 8; ++newRow) {
+	//				for (int newColumn = 0; newColumn < 8; ++newColumn) {
+	//					newPosition.first = newRow;
+	//					newPosition.second = newColumn;
+	//					if (piece->isValidMove(newPosition, piecePosition, *this)) {
+	//						// If a piece can move to the new position to block the check
+	//						piecePosition.first = row;
+	//						piecePosition.second = column;
+	//						piece->moveTo(newPosition); //deplace piece temp pour voir si roi est tjr en echec
+	//						isStillInCheck = isCheck(color);
+	//						// Undo move:
+	//						piece->moveTo(piecePosition);
+
+	//						if (!isStillInCheck) { //si roi n'est plus en echec retourne faux
+	//							return false;
+	//						}
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+	std::cout << "CHECKMATE : Game over!" << std::endl;
+	while (true);
 }
 
 void Board::selectPiece(int row, int col) {

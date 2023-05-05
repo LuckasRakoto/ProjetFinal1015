@@ -2,7 +2,6 @@
 
 King::King(std::pair<int, int> position, PieceColor couleur) : Piece(position, 'K', couleur) {
 	count_++;
-	std::cout << count_ << " C1 \n";
 	if (couleur == PieceColor::White) {
 		image_ = "pieces/wking.png";
 	}
@@ -16,7 +15,6 @@ King::King(std::pair<int, int> position, PieceColor couleur) : Piece(position, '
 
 King::King(PieceColor color) : Piece(color, 'K') {
 	count_++;
-	std::cout << count_ << " C2 \n";
 	if (count_ > 2) {
 		throw std::logic_error("Plus que 2 rois");
 	}
