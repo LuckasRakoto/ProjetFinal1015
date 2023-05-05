@@ -120,8 +120,9 @@ bool Board::noPiecesOnPath(std::pair<int, int> newPosition, std::pair<int, int> 
 bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPosition) {
 	Piece* piece = boardState[fromPosition.first][fromPosition.second];
 	std::pair<int, int> kingPosition;
+	PieceColor color = piece->getColor();
 
-	if (piece->getColor() == PieceColor::White) {
+	if (color == PieceColor::White) {
 		kingPosition = findKing(PieceColor::Black);
 		std::cout << "Opponent piece: Black\n";
 	}
@@ -145,6 +146,17 @@ bool Board::movePiece(std::pair<int, int> fromPosition, std::pair<int, int> toPo
 		std::cout << "Don't move piece (King position)\n";
 		return false;
 	}
+
+	if (isCheck(color)) {
+		if (King* k = dynamic_cast<King*>(piece)) {
+			std::cout << "King moved out of check\n";
+		}
+		else {
+			std::cout << "King is in check\n";
+			return false;
+		}
+	}
+
 	if (piece != nullptr) {
 		piece->moveTo(toPosition);
 		boardState[toPosition.first][toPosition.second] = piece;
@@ -183,6 +195,7 @@ bool Board::isCheck(PieceColor color) {
 			piecePosition.first = row;
 			piecePosition.second = column;
 			if (piece != nullptr && piece->getColor() != color && piece->isValidMove(kingPosition, piecePosition, *this)) {
+				std::cout << "King in check, must move\n";
 				return true;
 			}
 		}
@@ -212,7 +225,10 @@ void Board::isClicked(int i, int j) {
 		return;
 	}
 	else if (pieceSelected) {
-		if (!(movePiece(selectedPiecePos, { i,j }))) return;
+		if (!(movePiece(selectedPiecePos, { i,j }))) {
+			pieceSelected = false;
+			return;
+		}
 		pieceSelected = false;
 		std::cout << "on bouge" << std::endl;
 		whiteTurn = !whiteTurn;
