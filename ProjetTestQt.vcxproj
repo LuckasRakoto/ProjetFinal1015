@@ -121,11 +121,13 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="BoardWindow.cpp" />
+    <ClCompile Include="PiecePlacer.cpp" />
     <ClCompile Include="Pieces.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ClickabelLabel.hpp" />
+    <ClInclude Include="PiecePlacer.hpp" />
     <ClInclude Include="Pieces.hpp" />
   </ItemGroup>
   <ItemGroup>
