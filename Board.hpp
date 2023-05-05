@@ -11,7 +11,6 @@ class Board: public QObject {
 	Q_OBJECT
 private:
 	Piece* boardState[8][8];
-	void addPiece(Piece* piece, int row, int col);
 	std::pair<int, int> selectedPiecePos;
 	bool pieceSelected;
 	bool whiteTurn;
@@ -38,6 +37,7 @@ public:
 		whiteTurn = other.whiteTurn;
 	}
 
+	void addPiece(Piece* piece, int row, int col);
 	void addPiecesOnBoard();
 	void placePiece(Piece* piece, std::pair<int, int> tryPosition);
 	void printPieceAtPosition(std::pair<int, int> position);
